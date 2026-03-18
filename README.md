@@ -34,5 +34,4 @@ hello world
 [2] END 2026-03-18T19:12:25 STATUS: OK RC: 0 DURATION_SEC: 1.02
 [3] END 2026-03-18T19:12:26 STATUS: OK RC: 0 DURATION_SEC: 2.04
 Finished: 3 succeeded, 0 failed.
-
 ```

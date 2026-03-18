@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "plrun"
-version = "0.1.0"
+version = "0.1.1"
 description = "Run shell commands in parallel with console logs."
 readme = "README.md"
 requires-python = ">=3.8"
@@ -12,7 +12,6 @@ dependencies = []
 
 [project.scripts]
 plrun = "plrun.cli:main"
-sprun = "plrun.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
