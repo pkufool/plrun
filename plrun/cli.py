@@ -129,7 +129,7 @@ def run_job(job):
             lock,
             sys.stderr,
             (
-                f"[{index}] END {end_wall} STATUS: {status} "
+                f"[{index}] END {end_wall} CMD: {cmd} STATUS: {status} "
                 f"RC: {rc} DURATION_SEC: {duration:.2f}\n"
             ),
         )
@@ -139,7 +139,7 @@ def run_job(job):
         _safe_write_text(
             lock,
             sys.stderr,
-            f"[{index}] ERROR {error} DURATION_SEC: {duration:.2f}\n",
+            f"[{index}] ERROR {error} CMD: {cmd} DURATION_SEC: {duration:.2f}\n",
         )
 
     return {
