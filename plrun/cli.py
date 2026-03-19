@@ -22,8 +22,7 @@ import datetime as dt
 import sys
 import time
 import subprocess
-import threading
-from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
+from concurrent.futures import ProcessPoolExecutor
 from multiprocessing import Manager
 
 
@@ -38,12 +37,6 @@ def get_args(argv=None):
         type=int,
         default=10,
         help="Number of parallel jobs to run.",
-    )
-    parser.add_argument(
-        "-t",
-        "--thread",
-        action="store_true",
-        help="Use thread pool instead of process pool.",
     )
     parser.add_argument(
         "cmd_file",
@@ -185,21 +178,13 @@ def main(argv=None):
         for index, cmd in enumerate(commands)
     ]
 
-    if args.thread:
-        lock = threading.Lock()
+    with Manager() as manager:
+        lock = manager.Lock()
         jobs = [
             (index, cmd, stream_output, lock)
             for index, cmd, stream_output, _ in jobs
         ]
-        results = _run_jobs(ThreadPoolExecutor, jobs, args.num_jobs)
-    else:
-        with Manager() as manager:
-            lock = manager.Lock()
-            jobs = [
-                (index, cmd, stream_output, lock)
-                for index, cmd, stream_output, _ in jobs
-            ]
-            results = _run_jobs(ProcessPoolExecutor, jobs, args.num_jobs)
+        results = _run_jobs(ProcessPoolExecutor, jobs, args.num_jobs)
 
     success = sum(1 for result in results if result["returncode"] == 0)
     failed = len(results) - success

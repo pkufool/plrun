@@ -11,7 +11,7 @@ pip install plrun
 ```
 $ plrun -h
 
-usage: plrun [-h] [-j NUM_JOBS] [-t] [cmd_file]
+usage: plrun [-h] [-j NUM_JOBS] [cmd_file]
 
 Run commands in parallel.
 
@@ -22,7 +22,6 @@ optional arguments:
   -h, --help            show this help message and exit
   -j NUM_JOBS, --num-jobs NUM_JOBS
                         Number of parallel jobs to run.
-  -t, --thread          Use thread pool instead of process pool.
 
 $ printf "echo hello world\nsleep 1\nsleep 2\n" | plrun -j 3
 
